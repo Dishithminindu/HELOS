@@ -1,0 +1,29 @@
+@media (max-width: 1024px) {
+  .sidebar { width: 220px; }
+}
+
+@media (max-width: 768px) {
+  .app-container { flex-direction: column; }
+  
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 260px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .sidebar.open { left: 0; }
+  
+  .menu-toggle { display: block !important; cursor: pointer; }
+  
+  .content-area { padding: 1rem; }
+  
+  .stats-grid { grid-template-columns: 1fr; }
+  
+  .data-table-wrapper { overflow-x: auto; }
+}
+
+.menu-toggle { display: none; font-size: 1.5rem; background: none; border: none; }
