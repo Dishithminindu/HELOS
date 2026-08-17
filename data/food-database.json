@@ -1,0 +1,17 @@
+[
+  { "id": "f001", "name": "White rice", "category": "Rice", "servingSize": 100, "servingUnit": "g", "sodiumMg": 1 },
+  { "id": "f002", "name": "Dhal curry", "category": "Curries", "servingSize": 100, "servingUnit": "g", "sodiumMg": 280 },
+  { "id": "f003", "name": "Chicken curry", "category": "Curries", "servingSize": 100, "servingUnit": "g", "sodiumMg": 320 },
+  { "id": "f004", "name": "Fish curry", "category": "Curries", "servingSize": 100, "servingUnit": "g", "sodiumMg": 310 },
+  { "id": "f005", "name": "Dried fish (Sprats/Karawala)", "category": "Dried fish", "servingSize": 50, "servingUnit": "g", "sodiumMg": 1800 },
+  { "id": "f006", "name": "Coconut sambol", "category": "Condiments", "servingSize": 50, "servingUnit": "g", "sodiumMg": 450 },
+  { "id": "f007", "name": "Bread (White)", "category": "Bread/Bakery", "servingSize": 100, "servingUnit": "g", "sodiumMg": 490 },
+  { "id": "f008", "name": "Pol Roti", "category": "Bread/Bakery", "servingSize": 100, "servingUnit": "g", "sodiumMg": 350 },
+  { "id": "f009", "name": "String hoppers", "category": "Traditional", "servingSize": 100, "servingUnit": "g", "sodiumMg": 10 },
+  { "id": "f010", "name": "Instant noodles (with seasoning)", "category": "Processed foods", "servingSize": 80, "servingUnit": "g", "sodiumMg": 1200 },
+  { "id": "f011", "name": "Sausages (Chicken/Pork)", "category": "Processed meat", "servingSize": 100, "servingUnit": "g", "sodiumMg": 850 },
+  { "id": "f012", "name": "Canned fish (Mackerel in tomato)", "category": "Processed foods", "servingSize": 100, "servingUnit": "g", "sodiumMg": 400 },
+  { "id": "f013", "name": "Soy sauce", "category": "Sauces", "servingSize": 15, "servingUnit": "ml", "sodiumMg": 879 },
+  { "id": "f014", "name": "Salty potato chips", "category": "Salty snacks", "servingSize": 50, "servingUnit": "g", "sodiumMg": 300 },
+  { "id": "f015", "name": "Fried Rice (Restaurant)", "category": "Restaurant/Fast food", "servingSize": 300, "servingUnit": "g", "sodiumMg": 1100 }
+]
