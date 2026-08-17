@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Data - HALOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h1>HALOS</h1></div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">Dashboard</a>
+                <a href="patients.html" class="nav-item active">Patient Records</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-area">
+                <div class="flex justify-between align-center mb-4">
+                    <h2>Research Data Dashboard</h2>
+                    <button class="btn btn-primary" onclick="exportCSV()">Export to CSV</button>
+                </div>
+                <div class="alert card mb-4">
+                    <strong>Warning:</strong> Ensure exported data contains no directly identifiable patient information per protocol.
+                </div>
+
+                <div class="card">
+                    <table class="data-table" id="patients-table">
+                        <thead>
+                            <tr>
+                                <th>Study ID</th>
+                                <th>Date</th>
+                                <th>Estimated Salt (g/d)</th>
+                                <th>Risk Category</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/utils.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const records = Storage.getPatients();
+            const tbody = document.querySelector('#patients-table tbody');
+            tbody.innerHTML = records.map(r => `
+                <tr>
+                    <td>${r.id}</td>
+                    <td>${r.date}</td>
+                    <td>${r.saltEstimate}</td>
+                    <td>${r.risk}</td>
+                </tr>
+            `).join('') || '<tr><td colspan="4">No data available.</td></tr>';
+        });
+
+        function exportCSV() {
+            Utils.downloadCSV(Storage.getPatients(), 'halos_research_data.csv');
+        }
+    </script>
+</body>
+</html>
