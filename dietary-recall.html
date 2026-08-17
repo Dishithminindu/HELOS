@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24-Hour Recall - HALOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header"><h1>HALOS</h1></div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">Dashboard</a>
+                <a href="assessment.html" class="nav-item active">New Assessment</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-title">24-Hour Dietary Recall</div>
+            </header>
+
+            <div class="content-area">
+                <div class="progress-container">
+                    <div class="progress-step">1. Patient Info ✓</div>
+                    <div class="progress-step active">2. 24h Recall ✓</div>
+                    <div class="progress-step">3. Monthly FFQ ○</div>
+                    <div class="progress-step">4. AI Prediction ○</div>
+                </div>
+
+                <div class="card">
+                    <div class="flex justify-between align-center mb-4">
+                        <h3>Logged Foods</h3>
+                        <button class="btn btn-outline" id="add-food-btn">+ Add Food Item</button>
+                    </div>
+                    
+                    <table class="data-table" id="recall-table">
+                        <thead>
+                            <tr>
+                                <th>Meal</th>
+                                <th>Food Item</th>
+                                <th>Quantity</th>
+                                <th>Est. Sodium (mg)</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recall-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="mt-4 text-center">
+                        <h4>Total Estimated Sodium (24h): <span id="total-sodium-ui">0</span> mg</h4>
+                        <button class="btn btn-primary mt-4" id="next-btn">Continue to Monthly Questionnaire</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Food Modal -->
+    <div id="food-modal" class="hidden" style="position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; display:flex; justify-content:center; align-items:center;">
+        <div class="card" style="width: 400px; max-width: 90%;">
+            <h3>Add Food</h3>
+            <form id="add-food-form" class="mt-4">
+                <div class="form-group">
+                    <label class="form-label">Meal Time</label>
+                    <select class="form-control" id="meal-time" required>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Snack">Snack</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Search Food Database</label>
+                    <select class="form-control" id="food-select" required></select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quantity Consumed (g/ml)</label>
+                    <input type="number" class="form-control" id="food-qty" required min="1">
+                </div>
+                <div class="flex justify-between mt-4">
+                    <button type="button" class="btn btn-outline" id="close-modal-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/nutrition.js"></script>
+    <script src="js/dietaryRecall.js"></script>
+</body>
+</html>
