@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Questionnaire - HALOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h1>HALOS</h1></div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">Dashboard</a>
+                <a href="assessment.html" class="nav-item active">New Assessment</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-area">
+                <div class="progress-container">
+                    <div class="progress-step">1. Patient Info ✓</div>
+                    <div class="progress-step">2. 24h Recall ✓</div>
+                    <div class="progress-step active">3. Monthly FFQ ✓</div>
+                    <div class="progress-step">4. AI Prediction ○</div>
+                </div>
+
+                <div class="card">
+                    <h3>Monthly Food Frequency Questionnaire</h3>
+                    <p class="text-muted mb-4">Indicate consumption frequency over the past 30 days.</p>
+                    
+                    <form id="ffq-form">
+                        <div id="ffq-questions-container"></div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Calculate AI Prediction</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/monthlyQuestionnaire.js"></script>
+</body>
+</html>
