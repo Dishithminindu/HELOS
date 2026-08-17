@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Assessment - HALOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>HALOS</h1>
+                <span class="badge badge-demo">Demo Mode</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">Dashboard</a>
+                <a href="assessment.html" class="nav-item active">New Assessment</a>
+                <a href="patients.html" class="nav-item">Patient Records</a>
+                <a href="about.html" class="nav-item">About HALOS</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <div class="header-title">Patient Demographics</div>
+            </header>
+
+            <div class="content-area">
+                <div class="progress-container">
+                    <div class="progress-step active">1. Patient Info ✓</div>
+                    <div class="progress-step">2. 24h Recall ○</div>
+                    <div class="progress-step">3. Monthly FFQ ○</div>
+                    <div class="progress-step">4. AI Prediction ○</div>
+                </div>
+
+                <div class="card">
+                    <form id="assessment-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Anonymous Study ID</label>
+                                <input type="text" class="form-control" id="study-id" required placeholder="e.g. P-001">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Assessment Date</label>
+                                <input type="date" class="form-control" id="assessment-date" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Age</label>
+                                <input type="number" class="form-control" id="patient-age" min="18" max="120" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Sex</label>
+                                <select class="form-control" id="patient-sex" required>
+                                    <option value="">Select...</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                    <option value="O">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Height (cm)</label>
+                                <input type="number" class="form-control" id="patient-height" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Weight (kg)</label>
+                                <input type="number" class="form-control" id="patient-weight" step="0.1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-4 text-center">
+                            <button type="submit" class="btn btn-primary">Save & Continue to 24-Hour Recall</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/navigation.js"></script>
+    <script>
+        document.getElementById('assessment-date').valueAsDate = new Date();
+        document.getElementById('assessment-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const patientData = {
+                id: document.getElementById('study-id').value,
+                date: document.getElementById('assessment-date').value,
+                age: document.getElementById('patient-age').value,
+                sex: document.getElementById('patient-sex').value,
+                height: document.getElementById('patient-height').value,
+                weight: document.getElementById('patient-weight').value
+            };
+            Storage.setCurrentAssessment(patientData);
+            window.location.href = 'dietary-recall.html';
+        });
+    </script>
+</body>
+</html>
