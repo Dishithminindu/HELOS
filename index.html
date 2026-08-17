@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HALOS - AI Dietary Assessment</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loader-spinner"></div>
+        <div class="loading-title">HALOS</div>
+        <div class="loading-subtitle">AI Dietary Assessment System</div>
+        <div class="mt-4 badge badge-demo">RESEARCH PROTOTYPE</div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar dynamically injected or hardcoded for static -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>HALOS</h1>
+                <span class="badge badge-demo">Demo Mode</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item active">Dashboard</a>
+                <a href="assessment.html" class="nav-item">New Assessment</a>
+                <a href="patients.html" class="nav-item">Patient Records</a>
+                <a href="about.html" class="nav-item">About HALOS</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <div class="header-title">Dashboard Overview</div>
+                <div class="user-profile">Researcher_01</div>
+            </header>
+
+            <div class="content-area">
+                <div class="alert card mb-4" style="background: #e0f2fe; border-left: 4px solid var(--color-secondary);">
+                    <strong>Notice:</strong> This system is a research prototype. All data is stored locally in your browser for demonstration purposes.
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">Assessments Today</div>
+                        <div class="stat-value" id="dash-today">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Avg Estimated Salt Intake</div>
+                        <div class="stat-value" id="dash-avg-salt">0.0 g/d</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">High Risk Alert Rate</div>
+                        <div class="stat-value" id="dash-risk">0%</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Recent Assessments</h3>
+                    <div class="data-table-wrapper mt-4">
+                        <table class="data-table" id="recent-assessments-table">
+                            <thead>
+                                <tr>
+                                    <th>Study ID</th>
+                                    <th>Date</th>
+                                    <th>Est. Salt (g/d)</th>
+                                    <th>Risk Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Injected via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/navigation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const records = Storage.getPatients();
+            document.getElementById('dash-today').innerText = records.length;
+            if(records.length > 0) {
+                const avg = records.reduce((sum, r) => sum + r.saltEstimate, 0) / records.length;
+                document.getElementById('dash-avg-salt').innerText = avg.toFixed(1) + ' g/d';
+                const highRisk = records.filter(r => r.risk === 'High').length;
+                document.getElementById('dash-risk').innerText = Math.round((highRisk/records.length)*100) + '%';
+            }
+            
+            const tbody = document.querySelector('#recent-assessments-table tbody');
+            tbody.innerHTML = records.slice(0, 5).map(r => `
+                <tr>
+                    <td>${r.id}</td>
+                    <td>${r.date}</td>
+                    <td>${r.saltEstimate.toFixed(1)}</td>
+                    <td><span class="badge ${r.risk==='High'?'badge-demo':''}">${r.risk}</span></td>
+                    <td><a href="results.html?id=${r.id}" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">View</a></td>
+                </tr>
+            `).join('') || '<tr><td colspan="5" class="text-center">No assessments found. Start a <a href="assessment.html">New Assessment</a>.</td></tr>';
+        });
+    </script>
+</body>
+</html>
